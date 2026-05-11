@@ -81,4 +81,62 @@ body {background-color: #21a53d;}
 8. `.top-bar.dark h1` → ShopTLU
 ---
 ## Câu A3 — Box Model
+### Trường hợp 1: content-box
+```css
+.box-1 {
+  width: 400px;
+  padding: 20px;
+  border: 5px;
+  margin: 10px;
+}
+```
+* Chiều rộng hiển thị = 400 + 40 + 10 = **450px**
+* Không gian chiếm trên trang = 450 + 20 = **470px**
 
+---
+### Trường hợp 2: border-box
+```css
+.box-2 {
+  box-sizing: border-box;
+  width: 400px;
+  padding: 20px;
+  border: 5px;
+  margin: 10px;
+}
+```
+* Chiều rộng hiển thị = **400px**
+* Kích thước content thực tế = **350px**
+* Không gian chiếm trên trang = **420px**
+
+---
+### Trường hợp 3: Margin collapse
+```css
+.box-a { margin-bottom: 25px; }
+.box-b { margin-top: 40px; }
+```
+* Khoảng cách = **40px** → Giải thích: Trình duyệt sẽ so sánh các giá trị và chỉ giữ lại giá trị có kích thước lớn nhất chứ không cộng dồn
+
+---
+## Câu A4 (5đ) — Specificity (Độ ưu tiên)
+**1. Tính specificity score (a, b, c) cho mỗi rule:**
+*   **Rule A:** `p` -> Score: **(0, 0, 1)**
+*   **Rule B:** `.price` -> Score: **(0, 1, 0)**
+*   **Rule C:** `#main-price` -> Score: **(1, 0, 0)**
+*   **Rule D:** `p.price` -> Score: **(0, 1, 1)**
+
+---
+**2. Element sẽ có màu đỏ -> Giải thích: Khi so sánh specificity score từ trái sang phải, Rule C (1, 0, 0) có điểm số cao nhất vì nó sử dụng ID selector. Selector ID luôn có độ ưu tiên cao hơn Class (Rule B, D) và Tag HTML (Rule A). Do đó, trình duyệt sẽ áp dụng Rule C
+
+---
+
+**3. Nếu thêm style inline: `<p class="price" id="main-price" style="color: orange;">`**
+* Element sẽ có màu cam
+* Giải thích: Inline style có độ ưu tiên cao hơn tất cả các External và Internal CSS selectors thông thường.
+
+---
+
+**4. Nếu Rule A thêm `!important` (`p { color: black !important; }`)**
+* Element sẽ có màu đen
+* Giải thích: Từ khóa `!important` là một ngoại lệ và phá vỡ cấu trúc tính điểm specificity thông thường. Nó sẽ ghi đè lên toàn bộ các rules khác
+
+---
