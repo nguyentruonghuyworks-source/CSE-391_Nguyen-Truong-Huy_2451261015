@@ -51,3 +51,73 @@ function updateStatistics() {
 }
 // Gọi hàm render ngay khi tải trang
 renderStudents();
+
+// TRUY XUẤT DOM CHO FORM VÀ MODAL
+const modal = document.getElementById("studentModal");
+const btnOpenAddForm = document.getElementById("btnOpenAddForm");
+const btnCancel = document.getElementById("btnCancel");
+const studentForm = document.getElementById("studentForm");
+const modalTitle = document.getElementById("modalTitle");
+
+let isEditMode = false; // Biến cờ xác định trạng thái thêm hay sửa
+
+// SỰ KIỆN MỞ MODAL THÊM
+btnOpenAddForm.addEventListener("click", function() {
+    resetForm();
+    isEditMode = false;
+    modalTitle.innerText = "Thêm mới sinh viên";
+    document.getElementById("studentId").readOnly = false; // Cho phép nhập mã SV
+    modal.style.display = "block"; // Hiển thị form 
+});
+
+// SỰ KIỆN ĐÓNG MODAL
+btnCancel.addEventListener("click", function() {
+    modal.style.display = "none"; // Ẩn form
+});
+
+// SỰ KIỆN SUBMIT FORM
+studentForm.addEventListener("submit", function(e) {
+    e.preventDefault(); // Ngăn hành vi reload trang mặc định
+
+    // Lấy dữ liệu từ input bằng thuộc tính value
+    const student = {
+        id: document.getElementById("studentId").value,
+        fullName: document.getElementById("fullName").value,
+        dob: document.getElementById("dob").value,
+        className: document.getElementById("className").value,
+        score: document.getElementById("score").value,
+        email: document.getElementById("email").value
+    };
+
+    if (!isEditMode) {
+        // Kiểm tra trùng mã SV
+        const checkExist = students.some(s => s.id === student.id); // Dùng hàm some
+        if (checkExist) {
+            alert("Mã sinh viên đã tồn tại!");
+            return;
+        }
+        // Thêm vào mảng
+        students.push(student);
+        showNotification("Thêm sinh viên thành công!");
+    } 
+    
+    saveStudents();
+    modal.style.display = "none";
+});
+
+// HÀM LƯU DỮ LIỆU & RENDER LẠI
+function saveStudents() {
+    localStorage.setItem("students", JSON.stringify(students));
+    renderStudents();
+}
+
+// HÀM RESET FORM
+function resetForm() {
+    studentForm.reset();
+}
+
+// HÀM HIỂN THỊ THÔNG BÁO
+function showNotification(message) {
+    notification.innerText = message;
+    setTimeout(() => { notification.innerText = ""; }, 3000); // Tự xóa sau 3s
+} 
