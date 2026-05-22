@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Sinh Viên</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hệ Thống Quản Lý Sinh Viên</h1>
+        
+        <!-- Khu vực thông báo -->
+        <div id="notification" class="notification"></div>
+
+        <!-- Thống kê và Nút Thêm -->
+        <div class="header-actions">
+            <div class="stats">
+                <p>Tổng số sinh viên: <span id="totalStudents">0</span></p>
+                <p>Điểm trung bình lớp: <span id="averageScore">0.0</span></p>
+            </div>
+            <button id="btnOpenAddForm" class="btn-primary">Thêm Sinh Viên</button>
+        </div>
+
+        <!-- Bảng hiển thị -->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Mã SV</th>
+                    <th>Họ và tên</th>
+                    <th>Ngày sinh</th>
+                    <th>Lớp học</th>
+                    <th>Điểm TB</th>
+                    <th>Email</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+                <!-- Dữ liệu sẽ được render bằng JS ở đây -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Form Thêm/Sửa (ẩn mặc định) -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Thêm mới sinh viên</h2>
+            <form id="studentForm">
+                <input type="hidden" id="studentIdOriginal"> <!-- Dùng để lưu ID khi sửa -->
+                
+                <label>Mã sinh viên:</label>
+                <input type="text" id="studentId" required>
+                
+                <label>Họ và tên:</label>
+                <input type="text" id="fullName" required>
+                
+                <label>Ngày sinh:</label>
+                <input type="date" id="dob" required>
+                
+                <label>Lớp học:</label>
+                <input type="text" id="className" required>
+                
+                <label>Điểm trung bình:</label>
+                <input type="number" step="0.1" id="score" required>
+                
+                <label>Email:</label>
+                <input type="email" id="email" required>
+                
+                <div class="form-actions">
+                    <button type="button" id="btnCancel">Hủy</button>
+                    <button type="submit" id="btnSubmit">Lưu dữ liệu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

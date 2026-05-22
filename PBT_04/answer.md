@@ -45,3 +45,28 @@ Khái niệm này là thuật ngữ **"Cha relative gần nhất"** hoặc **"th
 #### Trường hợp 5: Cấu trúc CSS Grid lặp lại (Kiến thức bên ngoài)
 - **Dự đoán:** 3 hàng, 3 cột. Mấy hàng? 3 hàng. Item cuối cùng ở đâu? Cột đầu tiên của hàng số 3.
 - **Giải thích:** `grid-template-columns: repeat(3, 1fr)` tự động chia container thành 3 cột đều nhau. Với 7 items, hệ thống sẽ xếp lấp đầy 3 items cho hàng 1, 3 items cho hàng 2. Item số 7 sẽ bị đẩy xuống hàng thứ 3 và nằm ở vị trí ô đầu tiên bên trái
+
+---
+## PHẦN C — SUY LUẬN
+
+### Câu C1 — Flexbox vs Grid: Khi nào dùng gì?
+
+**1. Navigation bar ngang (logo + menu + buttons)**
+- **Nên dùng:** **Flexbox**
+- **Giải thích:** Thanh điều hướng là bố cục 1 chiều (trục ngang - `main-axis` là `row`). Flexbox sinh ra để xử lý các dải nội dung 1 chiều. Bạn có thể dễ dàng dùng `justify-content: space-between` [5] để đẩy logo sang trái, buttons sang phải và căn giữa nội dung bằng `align-items: center` [6].
+
+**2. Lưới ảnh Instagram (3 cột đều nhau, số ảnh không biết trước)**
+- **Nên dùng:** **Grid**
+- **Giải thích:** Đây là bố cục 2 chiều thực thụ (gồm cả hàng và cột). Grid kiểm soát cực tốt không gian 2D. Bằng cách dùng Grid, bạn ép buộc được thiết kế luôn tuân thủ cấu trúc 3 cột bằng nhau, các ảnh sẽ tự động xuống dòng và lấp đầy lưới thành các ô vuông vức bất kể số lượng ảnh được tải lên.
+
+**3. Layout blog: main content + sidebar**
+- **Nên dùng:** **Grid** (hoặc Kết hợp cả hai)
+- **Giải thích:** CSS Grid là vũ cụ lý tưởng cho các layout lớn của trang web (như định nghĩa vùng main và vùng sidebar). Bạn có thể định hình toàn bộ khung trang chỉ bằng một dòng code (ví dụ chia cột tỷ lệ 3:1). Sau khi tạo khung bằng Grid, bạn có thể dùng Flexbox *bên trong* vùng main content hoặc sidebar để sắp xếp các chi tiết nhỏ hơn.
+
+**4. Footer với 4 cột thông tin (Về chúng tôi, Liên kết, Hỗ trợ, Liên hệ)**
+- **Nên dùng:** **Grid**
+- **Giải thích:** Dù Flexbox có thể làm được bằng cách chia phần tử đều nhau trên 1 hàng, nhưng Grid kiểm soát layout dạng ô (cột) vững chắc hơn. Đặc biệt khi làm responsive (đáp ứng đa màn hình) [7], Grid giúp việc thu xếp từ 4 cột (desktop) xuống lưới 2 cột (tablet) và 1 cột (mobile) cực kỳ dễ dàng và gọn gàng.
+
+**5. Card sản phẩm (ảnh trên, text giữa, nút dưới — nút luôn dính đáy)**
+- **Nên dùng:** **Flexbox**
+- **Giải thích:** Nội dung bên trong một Card thường chảy theo 1 trục duy nhất (trục dọc). Chỉ cần dùng `display: flex` kết hợp `flex-direction: column` [8], sau đó áp dụng thuộc tính `margin-top: auto` cho nút bấm hoặc cấu hình phần text linh hoạt giãn ra (`flex-grow`), nút bấm sẽ tự động bị đẩy xuống sát mép dưới cùng của Card
