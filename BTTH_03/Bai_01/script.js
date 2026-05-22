@@ -99,8 +99,26 @@ studentForm.addEventListener("submit", function(e) {
         // Thêm vào mảng
         students.push(student);
         showNotification("Thêm sinh viên thành công!");
-    } 
-    
+    } else {
+        if (!isEditMode) {
+        const checkExist = students.some(s => s.id === student.id);
+        if (checkExist) {
+            alert("Mã sinh viên đã tồn tại!");
+            return;
+        }
+        students.push(student);
+        showNotification("Thêm sinh viên thành công!");
+    } else {
+        const originalId = document.getElementById("studentIdOriginal").value;
+        const index = students.findIndex(s => s.id === originalId);
+        
+        if (index !== -1) {
+            students[index] = student;
+            showNotification("Cập nhật sinh viên thành công!");
+        }
+    }
+    }
+
     saveStudents();
     modal.style.display = "none";
 });
@@ -121,3 +139,46 @@ function showNotification(message) {
     notification.innerText = message;
     setTimeout(() => { notification.innerText = ""; }, 3000); // Tự xóa sau 3s
 } 
+
+// HÀM XÓA SINH VIÊN
+function deleteStudent(studentId) {
+    // Hiển thị thông báo xác nhận xóa
+    const isConfirm = confirm(`Bạn có chắc chắn muốn xóa sinh viên mã ${studentId} không?`);
+    
+    if (isConfirm) {
+        // Tìm vị trí của phần tử trong mảng
+        const index = students.findIndex(s => s.id === studentId);
+        
+        if (index !== -1) {
+            // Xóa phần tử khỏi mảng
+            students.splice(index, 1);
+            saveStudents();
+            showNotification("Đã xóa sinh viên thành công!");
+        }
+    }
+}
+
+// HÀM CHUẨN BỊ DỮ LIỆU LÊN FORM SỬA
+function prepareEdit(studentId) {
+    // Tìm sinh viên cần sửa
+    const student = students.find(s => s.id === studentId);
+    
+    if (student) {
+        isEditMode = true;
+        modalTitle.innerText = "Cập nhật sinh viên";
+        
+        // Đưa dữ liệu ngược lên các ô input bằng value
+        document.getElementById("studentIdOriginal").value = student.id;
+        document.getElementById("studentId").value = student.id;
+        document.getElementById("studentId").readOnly = true; // Không cho sửa khóa chính
+        
+        document.getElementById("fullName").value = student.fullName;
+        document.getElementById("dob").value = student.dob;
+        document.getElementById("className").value = student.className;
+        document.getElementById("score").value = student.score;
+        document.getElementById("email").value = student.email;
+        
+        // Hiển thị modal
+        modal.style.display = "block";
+    }
+}
