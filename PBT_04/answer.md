@@ -69,4 +69,4 @@ Khái niệm này là thuật ngữ **"Cha relative gần nhất"** hoặc **"th
 
 **5. Card sản phẩm (ảnh trên, text giữa, nút dưới — nút luôn dính đáy)**
 - **Nên dùng:** **Flexbox**
-- **Giải thích:** Nội dung bên trong một Card thường chảy theo 1 trục duy nhất (trục dọc). Chỉ cần dùng `display: flex` kết hợp `flex-direction: column` [8], sau đó áp dụng thuộc tính `margin-top: auto` cho nút bấm hoặc cấu hình phần text linh hoạt giãn ra (`flex-grow`), nút bấm sẽ tự động bị đẩy xuống sát mép dưới cùng của Card
+- **Giải thích:** Nội dung bên trong một Card thường chảy theo 1 trục duy nhất (trục dọc). Chỉ cần dùng `display: flex` kết hợp `flex-direction: column` [8], sau đó áp dụng thuộc tính `margin-top: auto` cho nút bấm hoặc cấu hình phần text linh hoạt giãn ra (`flex-grow`), nút bấm sẽ tự động bị đẩy xuống sát mép dưới cùng của Card.
