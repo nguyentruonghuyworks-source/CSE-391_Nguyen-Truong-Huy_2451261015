@@ -72,13 +72,20 @@ taskForm.addEventListener("submit", function(e) {
         priority: document.getElementById("priority").value,
     };
 
-    if (!isEditMode) {
+       if (!isEditMode) {
         taskData.id = Date.now().toString();
         taskData.isCompleted = false; 
         tasks.push(taskData);
         showNotification("Đã thêm công việc thành công!");
     } else {
-
+        const currentId = document.getElementById("taskId").value;
+        const index = tasks.findIndex(t => t.id === currentId);
+        if (index !== -1) {
+            taskData.id = currentId;
+            taskData.isCompleted = tasks[index].isCompleted;
+            tasks[index] = taskData;
+            showNotification("Đã cập nhật công việc thành công!");
+        }
     }
 
     saveAndRender();
@@ -93,4 +100,39 @@ function saveAndRender() {
 function showNotification(message) {
     notification.innerText = message;
     setTimeout(() => { notification.innerText = ""; }, 3000);
+}
+
+function deleteTask(taskId) {
+    if (confirm("Bạn có chắc chắn muốn xóa công việc này?")) {
+        const index = tasks.findIndex(t => t.id === taskId);
+        if (index !== -1) {
+            tasks.splice(index, 1); 
+            saveAndRender();
+            showNotification("Đã xóa công việc!");
+        }
+    }
+}
+
+function prepareEdit(taskId) {
+    const task = tasks.find(t => t.id === taskId);
+    if (task) {
+        isEditMode = true;
+        modalTitle.innerText = "Sửa công việc";
+        
+        document.getElementById("taskId").value = task.id;
+        document.getElementById("title").value = task.title;
+        document.getElementById("description").value = task.description;
+        document.getElementById("dueDate").value = task.dueDate;
+        document.getElementById("priority").value = task.priority;
+        
+        modal.style.display = "block";
+    }
+}
+
+function toggleTaskStatus(taskId) {
+    const task = tasks.find(t => t.id === taskId);
+    if (task) {
+        task.isCompleted = !task.isCompleted;
+        saveAndRender();
+    }
 }
