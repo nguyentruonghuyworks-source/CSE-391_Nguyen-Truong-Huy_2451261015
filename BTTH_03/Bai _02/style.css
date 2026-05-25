@@ -1,0 +1,36 @@
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body { background-color: #f4f7f6; padding: 20px; }
+.container { max-width: 900px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+h1 { text-align: center; color: #333; }
+
+/* Thống kê */
+.stats-board { display: flex; justify-content: space-between; background: #e9ecef; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+.stat-box { font-size: 16px; }
+.text-success { color: green; }
+.text-danger { color: red; }
+
+/* Nút & Thông báo */
+.actions { margin-bottom: 20px; text-align: right; }
+button { padding: 8px 12px; cursor: pointer; border: none; border-radius: 4px; }
+.btn-primary { background: #007bff; color: white; font-weight: bold; }
+.btn-primary:hover { background: #0056b3; }
+.notification { color: green; font-weight: bold; text-align: center; height: 20px; margin-bottom: 10px; }
+
+/* Danh sách công việc dạng Card */
+.task-list { display: flex; flex-direction: column; gap: 15px; }
+.task-card { border: 1px solid #ddd; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; background: #fff; }
+.task-card.completed { opacity: 0.6; background: #f8f9fa; }
+.task-card.completed h3 { text-decoration: line-through; color: #6c757d; }
+.task-info { flex: 1; }
+.task-info h3 { margin: 0 0 5px 0; }
+.task-info p { margin: 5px 0; color: #555; font-size: 14px; }
+.badge { padding: 3px 8px; border-radius: 12px; font-size: 12px; color: #fff; background: #6c757d; }
+.badge.Cao { background: #dc3545; }
+.badge.Trung.bình { background: #ffc107; color: #000; }
+.task-actions { display: flex; gap: 10px; align-items: center; }
+
+/* Modal */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+.modal-content { background: #fff; width: 400px; margin: 50px auto; padding: 20px; border-radius: 8px; }
+.modal-content input, .modal-content textarea, .modal-content select { width: 100%; margin-bottom: 15px; padding: 8px; }
+.form-actions { text-align: right; }
