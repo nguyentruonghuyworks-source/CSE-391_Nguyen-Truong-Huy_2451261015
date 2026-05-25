@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Công việc Cá nhân</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quản lý Công Việc Cá Nhân</h1>
+
+        <div id="notification" class="notification"></div>
+
+        <div class="stats-board">
+            <div class="stat-box">Tổng: <strong id="totalTasks">0</strong></div>
+            <div class="stat-box text-success">Đã hoàn thành: <strong id="completedTasks">0</strong></div>
+            <div class="stat-box text-danger">Chưa hoàn thành: <strong id="incompleteTasks">0</strong></div>
+        </div>
+
+        <div class="actions">
+            <button id="btnOpenAddForm" class="btn-primary">Thêm Công Việc Mới</button>
+        </div>
+
+        <div id="taskList" class="task-list">
+        </div>
+    </div>
+
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Thêm công việc</h2>
+            <form id="taskForm">
+                <input type="hidden" id="taskId">
+                
+                <label>Tiêu đề công việc:</label>
+                <input type="text" id="title" required>
+                
+                <label>Mô tả ngắn:</label>
+                <textarea id="description" rows="3" required></textarea>
+                
+                <label>Hạn hoàn thành:</label>
+                <input type="date" id="dueDate" required>
+                
+                <label>Mức ưu tiên:</label>
+                <select id="priority">
+                    <option value="Cao">Cao</option>
+                    <option value="Trung bình" selected>Trung bình</option>
+                    <option value="Thấp">Thấp</option>
+                </select>
+                
+                <div class="form-actions">
+                    <button type="button" id="btnCancel">Hủy</button>
+                    <button type="submit" id="btnSubmit">Lưu công việc</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
