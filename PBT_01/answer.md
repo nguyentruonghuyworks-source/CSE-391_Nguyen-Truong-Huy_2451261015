@@ -177,7 +177,7 @@ Lập trình viên đang lạm dụng quá nhiều thẻ `<div>` để xây dự
 </footer>
 ````
 
-## Câu C2 - So sánh và tranh luận
+### Câu C2 - So sánh và tranh luận
 
 Quan điểm dùng `<div>` cho mọi thứ rồi định dạng bằng class tuy nhanh lúc đầu nhưng về lâu dài lại bộc lộ nhiều hạn chế lớn về mặt kỹ thuật.
 Về SEO, các công cụ tìm kiếm cần một cấu trúc rõ ràng để đánh giá website. Việc sử dụng các thẻ đúng bản chất ngữ nghĩa như `<header>`, `<main>`, `<article>` giúp bot Google phân loại nội dung chính xác, từ đó cải thiện thứ hạng. Nếu lạm dụng `<div>`, bot phải tự suy đoán cấu trúc, làm giảm hiệu quả index đáng kể. Bên cạnh đó, về mặt Accessibility, các phần mềm đọc màn hình cho người khiếm thị dựa vào Semantic HTML để điều hướng. Nếu chỉ toàn `<div>`, cấu trúc ngữ cảnh bị mất và trải nghiệm của họ sẽ bị phá vỡ.
