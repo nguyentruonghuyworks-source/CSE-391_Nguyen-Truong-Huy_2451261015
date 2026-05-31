@@ -184,3 +184,23 @@ Về SEO, các công cụ tìm kiếm cần một cấu trúc rõ ràng để đ
 Minh chứng thực tế: Ở một trang tin tức, việc bọc các bài viết trong thẻ `<article>` giúp trình đọc màn hình nhảy nhanh qua từng bài. Nếu thay bằng `<div>`, người dùng sẽ phải nghe tuần tự toàn bộ nội dung rất mất thời gian.
 Tuy nhiên, `<div>` vẫn có chỗ đứng riêng. Thẻ này hoàn toàn phù hợp cho những trường hợp chỉ cần chia khung layout, bọc khối để căn chỉnh CSS (như tạo Flexbox container) hoặc xử lý hiệu ứng Javascript mà không mang giá trị ngữ nghĩa.
 Tóm lại, Semantic HTML là tiêu chuẩn bắt buộc để mã nguồn vừa dễ bảo trì, vừa thân thiện với cả công cụ tìm kiếm lẫn người dùng
+
+---
+## Phần B
+
+### Câu B3
+
+**Các lỗi trong đoạn mã gốc**
+1. Lỗi dòng 1: thiếu khai báo tài liệu `html` trong thẻ DOCTYPE -> `<!DOCTYPE html>`
+2. Lỗi dòng 2: Thẻ `<html>` thiếu thuộc tính ngôn ngữ -> `<html lang="vi">`
+3. Lỗi dòng 4: thẻ `<title>`chưa đóng -> `<title>Trang web</title>`
+4. Lỗi dòng 5: giá trị charset sai chuẩn -> `<meta charset="UTF-8">`
+5. Lỗi dòng 8: Thẻ `<h1>` đóng bằng thẻ mở -> `</h1>`
+6. Lỗi dòng 12: Thẻ `<a>` đóng sai bằng thẻ mở -> `</a>`
+7. Lỗi dòng 20: Thẻ `<img>` thiếu dấu ngoặc kép cho đường dẫn và thiếu thuộc tính alt -> `<img src="ip161.jpg" alt="iPhone 16 Pro">`
+8. Lỗi dòng 22: Sai thứ tự đóng thẻ lồng nhau -> `<p>Giá: <b>25.990.000đ</b></p>`
+9. Lỗi bảng: thiếu cấu trúc semantic (thead, tbody) và header table dùng `<td>` -> dùng `<th>` cho tiêu đề và bọc trong `<thead>`
+10. Lỗi dòng 40, 42: Dùng 2 thẻ `<main>` trong một trang -> `<aside>`
+11. Lỗi dòng 45: Thẻ `<p>` chưa đóng -> `<p>Copyright 2026</p>`
+12. Lỗi dòng 12: Sai định dạn đường dẫn -> `<a href="home.html">Trang chủ</a> `
+13. Lỗi dòng 13: Sai định dạng đường dẫn -> `<a href="products.html">Sản phẩm</a>`
