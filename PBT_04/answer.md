@@ -70,3 +70,12 @@ Khái niệm này là thuật ngữ **"Cha relative gần nhất"** hoặc **"th
 **5. Card sản phẩm**
 - **Nên dùng:** **Flexbox**
 - **Giải thích:** Nội dung bên trong một Card thường chảy theo 1 trục duy nhất. Chỉ cần dùng `display: flex` kết hợp `flex-direction: column`, sau đó áp dụng thuộc tính `margin-top: auto` cho nút bấm hoặc cấu hình phần text linh hoạt giãn ra (`flex-grow`), nút bấm sẽ tự động bị đẩy xuống sát mép dưới cùng của Card
+
+---
+## Phần B
+
+### Câu B3
+
+1. **Sử dụng `minmax()`:** Ở phần container cha, `grid-template-columns: 200px minmax(300px, 1fr) 200px;` giúp thiết lập cột Sidebar và Ads khóa cứng 200px. Cột `main` ở giữa chiếm phần không gian còn lại `1fr` nhưng được khống chế chiều rộng tối thiểu là `300px`, ngăn chặn tình trạng vỡ layout khi cửa sổ trình duyệt bị thu hẹp.
+2. **Nâng cao `grid-template-areas`:** Layout được đặt tên các vùng một cách tường minh (`"header header header"`, `"sidebar main ads"`...) thay vì chỉ sử dụng số line row/col. Bản chất của việc set `header`, `hero` và `footer` lặp lại 3 lần trên cùng 1 dòng đã trực tiếp đáp ứng yêu cầu `grid-column: 1 / -1` (Span Full Width).
+3. **Nâng cao `span 2` trong Hero Banner:** Khu vực `.hero` được set thành một sub-grid có 3 cột. Ở bên trong nó có chứa `.hero-featured-card` được gán thuộc tính `grid-column: span 2;`. Nó sẽ hiển thị lấn sang 2 cột, tạo ra hiệu ứng nổi bật (Featured Product) hệt như một banner khuyến mãi đặc biệt ngay khi người dùng vừa mới vào trang.
