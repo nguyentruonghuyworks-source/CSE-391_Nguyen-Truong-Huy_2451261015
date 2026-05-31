@@ -134,3 +134,10 @@ Tại vì HTML5 validation là các tính năng xử lý ở phía **Frontend** 
 **4. Nêu 2 rủi ro bảo mật nếu chỉ validate trên Frontend mà không validate Backend:**
 1.  **Dữ liệu rác và mã độc dễ dàng xâm nhập vào Cơ sở dữ liệu:** Kẻ gian có thể bỏ qua bước xác thực Frontend và gửi trực tiếp Request chứa dữ liệu sai định dạng hoặc mã độc đến **Web Server**, làm hỏng hệ thống và cấu trúc CSDL bên dưới.
 2.  **Lộ kẽ hở Logic Ứng dụng:** Nếu các quy tắc kinh doanh quan trọng như định dạng PIN, số dư chỉ được đặt ở Frontend – phần mã mà ai cũng có thể xem được, kẻ tấn công sẽ nắm bắt được quy luật để giả mạo các Request độc hại, thao túng luồng hoạt động của hệ thống ngân hàng.
+
+---
+## Phần B
+
+### Câu B1
+* **HTML chỉ validate từng input riêng lẻ, không so sánh giữa 2 input bởi nó không có cơ chế so sánh giá trị giữa các thẻ input với nhau.**
+
