@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positioning Playground</title>
+    <link rel="stylesheet" href="positioning.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">MyLogo</div>
+        <nav class="navigation">
+            <a href="#">Trang chủ</a>
+            <a href="#">Sản phẩm</a>
+            <a href="#">Liên hệ</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Danh mục</h3>
+            <ul>
+                <li><a href="#">Điện thoại</a></li>
+                <li><a href="#">Laptop</a></li>
+                <li><a href="#">Phụ kiện</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h2>Sản phẩm nổi bật</h2>
+
+            <div class="card">
+                <div class="badge">HOT</div>
+                <img src="https://via.placeholder.com/150" alt="Ảnh sản phẩm">
+                <h3>Sản phẩm A</h3>
+                <p>Mô tả ngắn gọn về sản phẩm A. Đây là sản phẩm đang bán chạy nhất.</p>
+                <button class="btn-buy">Mua ngay</button>
+            </div>
+
+            <div class="dummy-scroll-space">
+                <p>Cuộn xuống để xem hiệu ứng Fixed Header và Sticky Sidebar...</p>
+                <p>(Khu vực này được tạo ra để tạo thanh cuộn cho trang web)</p>
+            </div>
+        </main>
+    </div>
+
+    <button class="scroll-top" title="Lên đầu trang">↑</button>
+
+</body>
+</html>
