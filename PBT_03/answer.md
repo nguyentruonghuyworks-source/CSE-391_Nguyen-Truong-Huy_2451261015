@@ -117,7 +117,7 @@ body {background-color: #21a53d;}
 * Khoảng cách = **40px** → Giải thích: Trình duyệt sẽ so sánh các giá trị và chỉ giữ lại giá trị có kích thước lớn nhất chứ không cộng dồn
 
 ---
-## Câu A4 (5đ) — Specificity (Độ ưu tiên)
+## Câu A4 — Specificity (Độ ưu tiên)
 **1. Tính specificity score (a, b, c) cho mỗi rule:**
 *   **Rule A:** `p` -> Score: **(0, 0, 1)**
 *   **Rule B:** `.price` -> Score: **(0, 1, 0)**
@@ -140,3 +140,42 @@ body {background-color: #21a53d;}
 * Giải thích: Từ khóa `!important` là một ngoại lệ và phá vỡ cấu trúc tính điểm specificity thông thường. Nó sẽ ghi đè lên toàn bộ các rules khác
 
 ---
+# Phần C
+
+## Câu C1
+
+**1. Tính chiều rộng thực tế của sidebar và content (theo mặc định content-box)**
+*   **Chiều rộng thực tế `.sidebar`** = 300px (width) + 20px (padding-left) + 20px (padding-right) + 1px (border-left) + 1px (border-right) = **342px**.
+*   **Chiều rộng thực tế `.content`** = 660px (width) + 30px (padding-left) + 30px (padding-right) + 1px (border-left) + 1px (border-right) = **722px**.
+
+**2. Giải thích tại sao layout bị vỡ**
+Tổng chiều rộng thực tế của cả 2 phần tử khi đặt cạnh nhau là: **342px + 722px = 1064px** 
+Phần tử `.container` bao ngoài được thiết lập chiều rộng cố định là `width: 960px`. Vì tổng kích thước của 2 khối con (1064px) lớn hơn khoảng không gian cho phép của phần tử cha (960px), nên thuộc tính `float: left` không thể xếp cả hai trên cùng một hàng ngang. Do thiếu chỗ, phần tử `.content` xếp phía sau sẽ bị đẩy xuống một dòng mới
+
+**3. Đưa ra 2 cách sửa khác nhau**
+*   **Cách 1 (Dùng `border-box`):** Thêm thuộc tính `box-sizing: border-box;` vào `.sidebar` và `.content`. Thuộc tính này giúp thay đổi cách tính `width`, làm cho `width` bao gồm luôn cả content, padding và border. Khi đó, `.sidebar` sẽ chiếm đúng 300px và `.content` chiếm đúng 660px (Tổng: 300 + 660 = 960px), vừa khít với container
+*   **Cách 2 (Không dùng `border-box`):** Giữ nguyên box-sizing mặc định (`content-box`). Ta phải tính toán và trừ thủ công phần kích thước của padding và border vào thuộc tính `width` lúc khai báo 
+    *   Sửa `width` của `.sidebar` thành: 300 - 40 (padding) - 2 (border) = **258px**
+    *   Sửa `width` của `.content` thành: 660 - 60 (padding) - 2 (border) = **598px**
+
+---
+## Câu C2
+
+```markdown
+## Câu C2: Cascade Puzzle
+
+**1. "Sản phẩm A" (h2) có font-size = 20px và color = green**
+*   **Giải thích:**
+    *   **Font-size:** Thẻ `h2` chịu tác động của bộ chọn trực tiếp `.card .title` được khai báo `font-size: 20px`. Dựa theo quy tắc tính đặc hiệu, bộ chọn này có độ đặc hiệu là `0-0-2-0` (gồm 2 class). Các giá trị font-size ở `body` (16px) hay `.container` (14px) đều bị ghi đè vì bộ chọn trực tiếp ưu tiên hơn giá trị kế thừa.
+    *   **Color:** Thẻ `h2` này chịu tác động của 2 quy tắc màu là `#featured .title` (có độ đặc hiệu `0-1-1-0` gồm 1 ID và 1 class) và `.highlight` (`color: green !important;`). Mặc dù ID có mức độ ưu tiên cao, nhưng thuộc tính `color: green` đi kèm với từ khóa `!important` nên nó thay đổi thứ tự ưu tiên của CSS và được đẩy lên mức ưu tiên cao nhất. Kết quả hiển thị màu **green**.
+
+**2. "Mô tả sản phẩm" (p trong card featured) có color = blue**
+*   **Giải thích:** Thẻ `p` này khớp với bộ chọn trực tiếp `.card p` (độ đặc hiệu `0-0-1-1` gồm 1 class và 1 element). Tại đây, thuộc tính `color: inherit;` bắt buộc thẻ `p` phải kế thừa màu sắc từ phần tử cha trực tiếp của nó. Phần tử cha bao bọc thẻ `p` này là thẻ `div` mang lớp `.card`. Vì `.card` đã được khai báo thuộc tính `color: blue;`, thẻ `p` sẽ nhận màu **blue**.
+
+**3. "Sản phẩm B" (h2) có font-size = 20px và color = blue**
+*   **Giải thích:**
+    *   **Font-size:** Giống với "Sản phẩm A", thẻ `h2` này cũng khớp với bộ chọn trực tiếp `.card .title` nên nhận giá trị `font-size: 20px`
+    *   **Color:** Thẻ `h2` này không khớp với bất kỳ bộ chọn CSS trực tiếp nào quy định về màu sắc. Theo nguyên tắc kế thừa, nó sẽ tự động lấy màu sắc từ phần tử cha trực tiếp là thẻ `div` mang lớp `.card` (`color: blue;`). Kết quả là màu **blue**
+
+**4. "Mô tả sản phẩm B" (p.highlight) có color = green**
+*   **Giải thích:** Thẻ `p` này khớp với cả bộ chọn `.card p` (`color: inherit;`) và lớp `.highlight` (`color: green !important;`). Nhờ có từ khóa `!important`, thuộc tính màu green mang mức ưu tiên cao nhất, nó ghi đè hoàn toàn lệnh `inherit`. Kết quả là màu hiển thị **green**
