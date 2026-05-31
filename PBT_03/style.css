@@ -1,0 +1,66 @@
+* { 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    color: #333333;
+    line-height: 1.5;
+}
+
+header {
+    background-image: linear-gradient(180deg, #555555, #000000);
+    color: white;
+    padding: 20px;
+}
+
+#skills {
+    margin: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: blue;
+}
+
+nav a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+nav .active {
+    color: orange;
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: #222222;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #cccccc;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+tr:hover {
+    background-color: #ffff99;
+}
+
+footer {
+    background-color: #111111;
+    color: #aaaaaa;
+    text-align: center;
+    padding: 15px;
+}

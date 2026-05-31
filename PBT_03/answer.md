@@ -161,9 +161,6 @@ Phần tử `.container` bao ngoài được thiết lập chiều rộng cố �
 ---
 ## Câu C2
 
-```markdown
-## Câu C2: Cascade Puzzle
-
 **1. "Sản phẩm A" (h2) có font-size = 20px và color = green**
 *   **Giải thích:**
     *   **Font-size:** Thẻ `h2` chịu tác động của bộ chọn trực tiếp `.card .title` được khai báo `font-size: 20px`. Dựa theo quy tắc tính đặc hiệu, bộ chọn này có độ đặc hiệu là `0-0-2-0` (gồm 2 class). Các giá trị font-size ở `body` (16px) hay `.container` (14px) đều bị ghi đè vì bộ chọn trực tiếp ưu tiên hơn giá trị kế thừa.
@@ -179,3 +176,54 @@ Phần tử `.container` bao ngoài được thiết lập chiều rộng cố �
 
 **4. "Mô tả sản phẩm B" (p.highlight) có color = green**
 *   **Giải thích:** Thẻ `p` này khớp với cả bộ chọn `.card p` (`color: inherit;`) và lớp `.highlight` (`color: green !important;`). Nhờ có từ khóa `!important`, thuộc tính màu green mang mức ưu tiên cao nhất, nó ghi đè hoàn toàn lệnh `inherit`. Kết quả là màu hiển thị **green**
+
+---
+# Phần B
+
+## Câu B1
+
+1. **Element selector (Bộ chọn phần tử):** `body`, `header`, `table`, `th`, `td`, `footer`
+2. **Class selector (Bộ chọn lớp):** `.active`
+3. **ID selector (Bộ chọn ID):** `#skills`
+4. **Descendant selector (Bộ chọn hậu duệ):** `nav a` (Chọn tất cả thẻ `a` nằm bên trong thẻ `nav`)
+5. **Pseudo-class selector (Bộ chọn lớp giả):** `a:hover`, `tr:nth-child(even)`, `tr:hover`
+
+## Câu B2
+
+### 1. Chứng minh content-box vs border-box
+
+*   **Hộp 1 (content-box):** chiều rộng thực tế = **350 px**
+*   **Hộp 2 (border-box):** chiều rộng thực tế = **300 px**
+*   **Giải thích sự khác biệt:** 
+    *   Khi sử dụng `box-sizing: content-box`, thuộc tính `width: 300px` chỉ áp dụng cho phần nội dung. Chiều rộng thực tế chiếm chỗ trên trang của Hộp 1 sẽ được cộng dồn thêm: Width (300) + Padding Trái/Phải (20*2) + Border Trái/Phải (5*2) = 350px  
+    *   Ngược lại, khi sử dụng `box-sizing: border-box`, thuộc tính `width: 300px` sẽ bao gồm luôn cả content, padding và border. Trình duyệt sẽ tự động thu hẹp phần nội dung bên trong lại để đảm bảo tổng kích thước của Hộp 2 bị khóa cứng đúng bằng 300px 
+### 2. Layout 3 cột
+
+*   **Tính toán nếu không dùng `border-box`:**
+    *   Nếu để `content-box` mặc định, kích thước thực tế của từng cột sẽ bị cộng dồn thêm padding:
+        *   Cột trái (sidebar): 250px + (15px padding * 2) = 280px.
+        *   Cột giữa (content): 500px + (20px padding * 2) = 540px.
+        *   Cột phải (ads): 250px + (15px padding * 2) = 280px.
+    *   **Tổng chiều rộng 3 cột thực tế:** 280 + 540 + 280 = **1100px**.
+*   **Giải thích:** Vì tổng kích thước 3 cột (1100px) lớn hơn chiều rộng của phần tử `.container-1000` chứa nó (1000px), các cột không thể nằm vừa trên cùng một hàng ngang nên layout sẽ bị vỡ. Bằng cách áp dụng `box-sizing: border-box`, chiều rộng thực tế của 3 cột được giữ nguyên đúng với khai báo `width` (250 + 500 + 250 = 1000px), giúp layout khớp hoàn hảo 100% vào trong container
+
+## Câu B3
+
+1. `* { color: black; }` -> Specificity: **0,0,0** (0 ID, 0 Class, 0 Element)
+2. `p { color: gray; }` -> Specificity: **0,0,1** (0 ID, 0 Class, 1 Element)
+3. `.text { color: brown; }` -> Specificity: **0,1,0** (0 ID, 1 Class, 0 Element)
+4. `p.text { color: yellow; }` -> Specificity: **0,1,1** (0 ID, 1 Class, 1 Element)
+5. `.text.highlight { color: orange; }` -> Specificity: **0,2,0** (0 ID, 2 Class, 0 Element)
+6. `p.text.highlight { color: red; }` -> Specificity: **0,2,1** (0 ID, 2 Class, 1 Element)
+7. `#demo { color: pink; }` -> Specificity: **1,0,0** (1 ID, 0 Class, 0 Element)
+8. `p#demo { color: purple; }` -> Specificity: **1,0,1** (1 ID, 0 Class, 1 Element)
+9. `#demo.text.highlight { color: blue; }` -> Specificity: **1,2,0** (1 ID, 2 Class, 0 Element)
+10. `p#demo.text.highlight { color: green; }` -> Specificity: **1,2,1** (1 ID, 2 Class, 1 Element)
+
+### Element cuối cùng hiển thị màu gì? Tại sao?
+- Element cuối cùng sẽ hiển thị màu **green**.
+- **Vì:** Trình duyệt áp dụng thuộc tính CSS dựa trên tính đặc hiệu của các rule trỏ đến phần tử đó. Rule `p#demo.text.highlight` có điểm specificity cao nhất là `1,2,1`. Do đó, màu xanh lá của rule này có mức độ ưu tiên lớn nhất và sẽ ghi đè tất cả các màu khác
+
+### Thay đổi thứ tự rules trong CSS file. Kết quả có đổi không? Giải thích.
+- **Kết quả KHÔNG thay đổi.**
+- **Giải thích:** Tính đặc hiệu luôn được trình duyệt ưu tiên xét duyệt trước tiên. Quá trình Cascade chỉ xảy ra khi các rule CSS có cùng một mức điểm đặc hiệu bằng nhau. Vì 10 rule ở trên có số điểm specificity hoàn toàn khác nhau, nên dù bạn có đổi vị trí các dòng code thì trình duyệt vẫn luôn ưu tiên chọn rule có điểm cao nhất
