@@ -75,6 +75,112 @@ Lập trình viên đang lạm dụng quá nhiều thẻ `<div>` để xây dự
 ---
 ## Phần C - Suy luận
 
+### Câu C1 — Thiết kế cấu trúc
 
+```html
+<!-- Phần đầu trang -->
+<header> <!-- header: Dùng cho phần đầu trang, thường chứa logo và menu chính -->
+    <nav> <!-- nav: Dùng cho khu vực chứa các liên kết điều hướng chính -->
+        <ul> <!-- ul: Menu thường là danh sách không thứ tự -->
+            <li><a href="/">Trang chủ</a></li>
+            <li><a href="/products">Sản phẩm</a></li>
+        </ul>
+    </nav>
+</header>
 
+<!-- Nội dung chính của trang -->
+<main> <!-- main: Bao bọc nội dung cốt lõi của trang web, giúp Google hiểu trọng tâm -->
+    
+    <!-- Breadcrumb điều hướng -->
+    <nav aria-label="breadcrumb"> <!-- nav: Được dùng cho cụm điều hướng (breadcrumb) -->
+        <ol> <!-- ol: Dùng danh sách có thứ tự vì breadcrumb thể hiện phân cấp bậc rõ ràng -->
+            <li><a href="/">Trang chủ</a></li>
+            <li><a href="/dien-thoai">Điện thoại</a></li>
+            <li>iPhone 16</li>
+        </ol>
+    </nav>
 
+    <!-- Chi tiết sản phẩm -->
+    <article> <!-- article: Đóng gói 1 nội dung độc lập, rất phù hợp cho thông tin 1 sản phẩm E-commerce -->
+        
+        <!-- Khu vực ảnh sản phẩm -->
+        <section class="product-gallery"> <!-- section: Phân đoạn riêng cho khu vực chứa hình ảnh -->
+            <figure> <!-- figure: Thẻ semantic chuyên bọc hình ảnh minh họa -->
+                <img src="ip161.jpg" alt="Ảnh 1">
+                <img src="ip162.jpg" alt="Ảnh 2"> 
+                <img src="ip163.jpg" alt="Ảnh 3">
+                <img src="ip164.jpg" alt="Ảnh 4">
+                <img src="ip165.jpg" alt="Ảnh 5">
+            </figure>
+        </section>
+
+        <!-- Thông tin cơ bản sản phẩm -->
+        <section class="product-info"> <!-- section: Phân đoạn cho thông tin cơ bản -->
+            <h1>iPhone 16</h1> <!-- h1: Tiêu đề quan trọng nhất của trang, mô tả tên sản phẩm để tối ưu SEO -->
+            <p class="price">25.000.000đ</p> <!-- p: Đoạn văn bản hiển thị giá -->
+            <div class="rating"> <!-- div: Thẻ container gom nhóm phần đánh giá sao -->
+                <span>⭐⭐⭐⭐⭐</span> <!-- span: Thẻ inline bọc text ngắn (sao đánh giá) -->
+            </div>
+            <p class="description">
+                Điện thoại iPhone 16 bộ nhớ 256GB là phiên bản dung lượng lưu trữ được mở rộng so với bản 128GB. Cụ thể điện thoại với dung lượng bộ nhớ 256GB đáp ứng tốt được các nhu cầu lưu trữ hình ảnh và video cơ bản.
+                Phiên bản dung lượng này thích hợp với người dùng muốn sở hữu mẫu điện thoại iPhone 16 series cân bằng giữa hiệu năng và không gian lưu trữ như người dùng thường xuyên chụp ảnh, cài đặt ứng dụng cũng như yêu thích tính năng giải trí. Cùng với đó iPhone 16 Plus 256GB sở hữu màn hình lớn 6,7 inch mang lại không gian hiển thị thoải mái.
+            </p> <!-- p: Đoạn văn mô tả sản phẩm -->
+        </section>
+
+        <!-- Bảng thông số kỹ thuật -->
+        <section class="product-specs">
+            <h2>Thông số kỹ thuật</h2> <!-- h2: Tiêu đề phụ cấp 2 -->
+            <table> <!-- table: Dùng chuẩn xác cho dữ liệu có cấu trúc dạng bảng (DATA tabular) -->
+                <tbody> <!-- tbody: Bọc phần thân chứa dữ liệu của bảng -->
+                    <tr> <!-- tr: Định nghĩa 1 hàng trong bảng -->
+                        <th>Màn hình</th> <!-- th: Định nghĩa ô tiêu đề cột/hàng, được in đậm -->
+                        <td>6.1 inch</td> <!-- td: Định nghĩa ô chứa dữ liệu chi tiết -->
+                    </tr>
+                    <tr>
+                        <th>Chip</th>
+                        <td>A18 Bionic</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Khu vực đánh giá/bình luận -->
+        <section class="product-reviews"> <!-- section: Phân đoạn độc lập cho đánh giá -->
+            <h2>Đánh giá từ khách hàng</h2>
+            <article class="review-item"> <!-- article: Mỗi 1 bình luận của khách hàng cũng là 1 nội dung độc lập -->
+                <strong>Người dùng A</strong> <!-- strong: In đậm và nhấn mạnh tên người dùng -->
+                <p>Sản phẩm rất tốt!</p>
+            </article>
+        </section>
+
+    </article>
+
+    <!-- Sidebar: Sản phẩm tương tự -->
+    <aside> <!-- aside: Dùng cho các nội dung phụ trợ, liên quan gián tiếp đến nội dung chính (sidebar, sp tương tự) -->
+        <h2>Sản phẩm tương tự</h2>
+        <ul>
+            <li>
+                <article> <!-- article: Mỗi sản phẩm tương tự thu nhỏ cũng là một đối tượng độc lập -->
+                    <h3>iPhone 15 Pro</h3> <!-- h3: Tiêu đề cấp 3 cho sản phẩm phụ -->
+                    <img src="ip15.jpg" alt="iPhone 15">
+                    <p>20.000.000đ</p>
+                </article>
+            </li>
+        </ul>
+    </aside>
+
+</main>
+
+<!-- Phần chân trang -->
+<footer> <!-- footer: Xác định phần chân trang, chứa thông tin bản quyền, liên kết phụ -->
+    <p>© 2026 ShopTLU. All rights reserved.</p>
+</footer>
+````
+
+## Câu C2 - So sánh và tranh luận
+
+Quan điểm dùng `<div>` cho mọi thứ rồi định dạng bằng class tuy nhanh lúc đầu nhưng về lâu dài lại bộc lộ nhiều hạn chế lớn về mặt kỹ thuật.
+Về SEO, các công cụ tìm kiếm cần một cấu trúc rõ ràng để đánh giá website. Việc sử dụng các thẻ đúng bản chất ngữ nghĩa như `<header>`, `<main>`, `<article>` giúp bot Google phân loại nội dung chính xác, từ đó cải thiện thứ hạng. Nếu lạm dụng `<div>`, bot phải tự suy đoán cấu trúc, làm giảm hiệu quả index đáng kể. Bên cạnh đó, về mặt Accessibility, các phần mềm đọc màn hình cho người khiếm thị dựa vào Semantic HTML để điều hướng. Nếu chỉ toàn `<div>`, cấu trúc ngữ cảnh bị mất và trải nghiệm của họ sẽ bị phá vỡ.
+Minh chứng thực tế: Ở một trang tin tức, việc bọc các bài viết trong thẻ `<article>` giúp trình đọc màn hình nhảy nhanh qua từng bài. Nếu thay bằng `<div>`, người dùng sẽ phải nghe tuần tự toàn bộ nội dung rất mất thời gian.
+Tuy nhiên, `<div>` vẫn có chỗ đứng riêng. Thẻ này hoàn toàn phù hợp cho những trường hợp chỉ cần chia khung layout, bọc khối để căn chỉnh CSS (như tạo Flexbox container) hoặc xử lý hiệu ứng Javascript mà không mang giá trị ngữ nghĩa.
+Tóm lại, Semantic HTML là tiêu chuẩn bắt buộc để mã nguồn vừa dễ bảo trì, vừa thân thiện với cả công cụ tìm kiếm lẫn người dùng
